@@ -1,26 +1,33 @@
-from .helpers import COMBINATIONS_INITIALS
+from .defs import COMBINATIONS_INITIALS, Combination
 from .turn import Turn
 from .player import Player
+from .dicecup import DiceCup
 
 class Generala:
     def __init__(self, players: "list[Player]") -> None:
         self.players = players
-        self.turn: Turn
+        self.scorecard = self.init_scorecard()
+        self.dice_cup = DiceCup()
+    """
+        self.turns = self.init_turns()
     
-    def start_turn(self) -> None:
-        self.turn = Turn(self.players[0])
-
-    def get_scorecard(self) -> str:
-        scorecard = ""
+    def init_turns(self) -> "list[Turn]":
+        self.turns = []
+        for i in range(len(Combination)):
+            self.turns.append(Turn(self.players[0]))
+        return self.turns
+    """
+    def init_scorecard(self) -> str:
+        self.scorecard = ""
         initials = ""
         for player in self.players:
             initial = player.name[0]
             if initial in initials:
                 initial = initial + '2'
             initials += initial.center(3) + '|'
-        scorecard += '|'.rjust(3) + initials + '\n'
+        self.scorecard += '|'.rjust(3) + initials + '\n'
         dashes = "-" * (3 + 4 * len(self.players))
-        scorecard += dashes + '\n'
+        self.scorecard += dashes + '\n'
         for combination_key in COMBINATIONS_INITIALS:
             line = COMBINATIONS_INITIALS[combination_key].rjust(2) + '|'
             for player in self.players:
@@ -29,5 +36,8 @@ class Generala:
                 else:
                     line += ' '.center(3)
                 line += '|'
-            scorecard += line + '\n'
-        return scorecard
+            self.scorecard += line + '\n'
+        return self.scorecard
+    
+    def get_scorecard(self) -> str:
+        return self.scorecard
