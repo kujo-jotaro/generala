@@ -10,16 +10,17 @@ class Generala:
     def start_turn(self) -> None:
         self.turn = Turn(self.players[0])
 
-    def print_scorecard(self) -> None:
+    def get_scorecard(self) -> str:
+        scorecard = ""
         initials = ""
         for player in self.players:
             initial = player.name[0]
             if initial in initials:
                 initial = initial + '2'
             initials += initial.center(3) + '|'
-        print('|'.rjust(3) + initials)
+        scorecard += '|'.rjust(3) + initials + '\n'
         dashes = "-" * (3 + 4 * len(self.players))
-        print(dashes)
+        scorecard += dashes + '\n'
         for combination_key in COMBINATIONS_INITIALS:
             line = COMBINATIONS_INITIALS[combination_key].rjust(2) + '|'
             for player in self.players:
@@ -28,4 +29,5 @@ class Generala:
                 else:
                     line += ' '.center(3)
                 line += '|'
-            print(line)
+            scorecard += line + '\n'
+        return scorecard

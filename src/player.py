@@ -1,4 +1,3 @@
-from .dicecup import DiceCup
 from .helpers import Combination
 from .sixsideddie import SixSidedDie
 from itertools import count, next
@@ -15,17 +14,23 @@ class Player:
     def __init__(self, name: str) -> None:
         self.id = next(self.id_iter)
         self.name = name
-        self.scorecard = self.init_scorecard()
+        self.scorecard = self.init_personal_scorecard()
         self.hand = self.empty_hand()
-        self.dice_cup = DiceCup()
 
-    def init_scorecard(self) -> "dict[Combination, int]":
+    def init_personal_scorecard(self) -> "dict[Combination, int]":
         scorecard = {}
         for combination in Combination:
             scorecard[combination] = None
         return scorecard
+
+    def add_die_to_hand(self, die: SixSidedDie) -> None:
+        self.hand.append(die)
+
+    def add_dice_to_hand(self, dice: "list[SixSidedDie]") -> None:
+        for die in dice:
+            self.add_die_to_hand(die)
     
-    def empty_hand(self):
+    def empty_hand(self) -> list:
         self.hand = []
         return self.hand
 
@@ -34,6 +39,3 @@ class Player:
         for score in self.scorecard.values:
             total_score += score
         return total_score
-
-    def choose_dice(self, dice_numbers: "list[int]") -> "list[SixSidedDie]":
-        self.hand += self.dice_cup.get_dice(dice_numbers)
