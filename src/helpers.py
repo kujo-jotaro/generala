@@ -87,7 +87,7 @@ def enter_players() -> "list[str]":
     while name == "" or name is None:
         name = input("Name: ")
         name.lower()
-        if name != "" and name not in players_names:
+        if name != "":
             players_names.append(name)
         if name == "" and len(players_names) < 2:
             choice = ""

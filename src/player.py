@@ -1,6 +1,7 @@
 from .dicecup import DiceCup
 from .helpers import Combination
 from .sixsideddie import SixSidedDie
+from itertools import count, next
 
 class Player:
     """
@@ -9,9 +10,12 @@ class Player:
     A player has a name, a hand, and on their turn (!), they roll the dice
     and choose what to make part of their hand.
     """
+    id_iter = count()
+
     def __init__(self, name: str) -> None:
-        self.scorecard = self.init_scorecard()
+        self.id = next(self.id_iter)
         self.name = name
+        self.scorecard = self.init_scorecard()
         self.hand = self.empty_hand()
         self.dice_cup = DiceCup()
 
@@ -24,9 +28,6 @@ class Player:
     def empty_hand(self):
         self.hand = []
         return self.hand
-
-    def get_initial(self) -> str:
-        return self.name[0]
 
     def calculate_total_score(self) -> int:
         total_score = 0

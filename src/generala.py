@@ -13,7 +13,10 @@ class Generala:
     def print_scorecard(self) -> None:
         initials = ""
         for player in self.players:
-            initials += player.get_initial().center(3) + '|'
+            initial = player.name[0]
+            if initial in initials:
+                initial = initial + '2'
+            initials += initial.center(3) + '|'
         print('|'.rjust(3) + initials)
         dashes = "-" * (3 + 4 * len(self.players))
         print(dashes)
