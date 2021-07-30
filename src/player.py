@@ -14,14 +14,18 @@ class Player:
     def __init__(self, name: str) -> None:
         self.id = next(self.id_iter)
         self.name = name
-        self.scorecard = self.init_personal_scorecard()
+        self.scorecard = self.init_player_scorecard()
         self.hand = self.empty_hand()
 
-    def init_personal_scorecard(self) -> "dict[Combination, int]":
+    def init_player_scorecard(self) -> "dict[Combination, int]":
         scorecard = {}
         for combination in Combination:
             scorecard[combination] = None
         return scorecard
+    
+    def empty_hand(self) -> list:
+        self.hand = []
+        return self.hand
 
     def add_die_to_hand(self, die: SixSidedDie) -> None:
         self.hand.append(die)
@@ -29,12 +33,8 @@ class Player:
     def add_dice_to_hand(self, dice: "list[SixSidedDie]") -> None:
         for die in dice:
             self.add_die_to_hand(die)
-    
-    def empty_hand(self) -> list:
-        self.hand = []
-        return self.hand
 
-    def calculate_total_score(self) -> int:
+    def get_total_score(self) -> int:
         total_score = 0
         for score in self.scorecard.values:
             total_score += score
