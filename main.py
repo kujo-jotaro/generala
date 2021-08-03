@@ -8,9 +8,7 @@ def main():
     for player_name in players_names:
         players.append(Player(player_name))
     game = Generala(players)
-    game.print_scorecard()
-    game.start_turn()
-    game.turn.play()
+    print(game.get_scorecard())
 
 if __name__ == "__main__":
     main()

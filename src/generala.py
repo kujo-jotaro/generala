@@ -1,4 +1,4 @@
-from .defs import COMBINATIONS_INITIALS, Combination
+from .defs import COMBINATIONS_INITIALS
 from .turn import Turn
 from .player import Player
 from .dicecup import DiceCup
@@ -7,16 +7,9 @@ class Generala:
     def __init__(self, players: "list[Player]") -> None:
         self.players = players
         self.scorecard = self.init_scorecard()
-        self.dice_cup = DiceCup()
-    """
-        self.turns = self.init_turns()
-    
-    def init_turns(self) -> "list[Turn]":
-        self.turns = []
-        for i in range(len(Combination)):
-            self.turns.append(Turn(self.players[0]))
-        return self.turns
-    """
+        self.turn = Turn()
+        self.dice_cup = DiceCup(5)
+
     def init_scorecard(self) -> str:
         self.scorecard = ""
         initials = ""

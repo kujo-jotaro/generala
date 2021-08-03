@@ -1,3 +1,4 @@
+from dicecup import DiceCup
 from .helpers import Combination
 from .sixsideddie import SixSidedDie
 from itertools import count, next
@@ -26,6 +27,9 @@ class Player:
     def empty_hand(self) -> list:
         self.hand = []
         return self.hand
+
+    def throw(self, dice_cup: DiceCup) -> None:
+        dice_cup.roll(dice_cup.dice_amount)
 
     def add_die_to_hand(self, die: SixSidedDie) -> None:
         self.hand.append(die)

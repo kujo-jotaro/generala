@@ -17,8 +17,13 @@ class DiceCup:
         for i in range(dice_amount):
             dice.append(SixSidedDie())
         return dice
+
+    def get_dice(self) -> "list[str]":
+        dice = []
+        for die in self.dice:
+            dice.append(str(die))
     
-    def get_dice(self, dice_indexes: "list[int]") -> "list[SixSidedDie]":
+    def choose_dice(self, dice_indexes: "list[int]") -> "list[SixSidedDie]":
         if range(0, len(self.dice) - 1) not in dice_indexes:
             raise IndicesOutOfBoundsError
         staying_dice = []
