@@ -1,5 +1,5 @@
 from random import randint
-from .helpers import DICE_STRINGS
+from .defs import DICE_STRINGS
 
 class SixSidedDie:
     """
