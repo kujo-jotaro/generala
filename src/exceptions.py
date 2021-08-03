@@ -8,3 +8,6 @@ class IndicesOutOfBoundsError(Exception):
     
     def __str__(self):
         return f'{self.indices} <- {self.message}'
+
+class DiceAmountExceededError(Exception):
+    pass
